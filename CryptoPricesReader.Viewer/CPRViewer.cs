@@ -38,6 +38,10 @@ namespace CryptoPricesReader.Viewer
             lblPriceTag.Visible = true;
             lblStatus.Visible = true;
             lblStatusTag.Visible = true;
+            lblRank.Visible = true;
+            lblRankTag.Visible = true;
+            lblHigh.Visible = true;
+            lblHighTag.Visible = true;
         }
 
         private async Task<string> SendRequest()
@@ -62,6 +66,9 @@ namespace CryptoPricesReader.Viewer
                 lblCurrencyTag.Text = selectedItem.Currency;
                 lblPriceTag.Text = selectedItem.Price;
                 lblStatusTag.Text = selectedItem.Status;
+                lblRankTag.Text = selectedItem.Rank;
+                lblHighTag.Text = selectedItem.High;
+                lblPriceDate.Text = selectedItem.PriceDate.ToString();
                 try
                 {
                     pictureBoxCurrencyPic.Image = await NomicsApiHelpers.GetImageAsync(selectedItem.LogoUrl);
