@@ -10,5 +10,6 @@ namespace CryptoPricesReader.Data.Enums
     {
         BTC = 0,
         ETH = 1,
+        ADA = 2,
     }
 }
