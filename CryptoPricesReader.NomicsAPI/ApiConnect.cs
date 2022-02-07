@@ -1,5 +1,5 @@
-﻿using CryptoPricesReader.NomicsAPI.Enums;
-using CryptoPricesReader.NomicsAPI.Helpers;
+﻿using CryptoPricesReader.Data.Enums;
+using CryptoPricesReader.Utilities.Helpers;
 using System.Net.Http.Headers;
 using System.Text;
 
@@ -10,10 +10,16 @@ namespace CryptoPricesReader.NomicsAPI
         private static readonly HttpClient _httpClient = new HttpClient();
 
         private const string ApiAddress = "https://api.nomics.com/v1";
+        private string ApiKey { get; set; }
 
-        public ApiConnect()
+        public ApiConnect ()
         {
 
+        }
+
+        public ApiConnect (string apiKey)
+        {
+            this.ApiKey = apiKey;
         }
 
         public async Task<string> SendRequest(QueryType queryType, string[] queryParams)
@@ -32,7 +38,7 @@ namespace CryptoPricesReader.NomicsAPI
             var stringBuilder = new StringBuilder();
             stringBuilder.Append(ApiAddress);
             stringBuilder.Append(NomicsApiHelpers.GetQueryFromQueryType(queryType));
-            stringBuilder.Append("?");
+            stringBuilder.Append($"?key={ApiKey}");
             stringBuilder.Append(NomicsApiHelpers.BuildQueryParams(queryParams));
 
             return stringBuilder.ToString(); ;

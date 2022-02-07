@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CryptoPricesReader.NomicsAPI.Enums
+namespace CryptoPricesReader.Data.Enums
 {
     public enum QueryType
     {

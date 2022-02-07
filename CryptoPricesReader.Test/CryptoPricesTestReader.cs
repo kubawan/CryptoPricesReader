@@ -1,5 +1,5 @@
-﻿using CryptoPricesReader.NomicsAPI;
-using CryptoPricesReader.NomicsAPI.Enums;
+﻿using CryptoPricesReader.Data.Enums;
+using CryptoPricesReader.NomicsAPI;
 
 namespace CryptoPricesReader.Test
 {
@@ -16,7 +16,7 @@ namespace CryptoPricesReader.Test
 
             string[] queryParams = new string[2];
 
-            queryParams[0] = "key=dcbe3fde97e13ccaf561cb905378084e2ea35c65";
+            queryParams[0] = "key=your_api_key";
             queryParams[1] = "ids=BTC";
 
             var response = await api.SendRequest(QueryType.CurrenciesTicker, queryParams);

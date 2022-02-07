@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CryptoPricesReader.Data\CryptoPricesReader.Data.csproj" />
-    <ProjectReference Include="..\CryptoPricesReader.Utilities\CryptoPricesReader.Utilities.csproj" />
   </ItemGroup>
 
 </Project>

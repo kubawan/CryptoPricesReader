@@ -1,7 +1,7 @@
-﻿using CryptoPricesReader.NomicsAPI.Enums;
+﻿using CryptoPricesReader.Data.Enums;
 using System.Text;
 
-namespace CryptoPricesReader.NomicsAPI.Helpers
+namespace CryptoPricesReader.Utilities.Helpers
 {
     public static class NomicsApiHelpers
     {
@@ -17,17 +17,20 @@ namespace CryptoPricesReader.NomicsAPI.Helpers
             }
         }
 
+        public static string BuildQueryParams(string queryParmas)
+        {
+            return queryParmas;
+        }
+
         public static string BuildQueryParams(string[] queryParmas)
         {
             var sb = new StringBuilder();
 
             foreach (var param in queryParmas)
             {
-                sb.Append(param);
                 sb.Append("&");
+                sb.Append(param);
             }
-
-            sb.Remove(sb.Length - 1, 1);
 
             return sb.ToString();
         }

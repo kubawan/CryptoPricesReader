@@ -1,7 +1,7 @@
 ﻿using System.Text.Json.Serialization;
 
 
-namespace CryptoPricesReader.NomicsAPI.Models.Responses
+namespace CryptoPricesReader.Data.Models.Responses
 {
     public class CurrenciesTicker
     {
