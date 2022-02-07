@@ -1,11 +1,7 @@
 ﻿using CryptoPricesReader.Data.Enums;
-using CryptoPricesReader.Data.Models.Responses;
 using System.Drawing;
-using System.IO;
-using System.Net;
 using System.Text;
 using System.Text.Json;
-using System.Text.Json.Serialization.Metadata;
 
 namespace CryptoPricesReader.Utilities.Helpers
 {

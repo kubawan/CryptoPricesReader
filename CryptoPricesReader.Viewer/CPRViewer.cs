@@ -2,33 +2,57 @@ using CryptoPricesReader.Data.Enums;
 using CryptoPricesReader.Data.Models.Responses;
 using CryptoPricesReader.NomicsAPI;
 using CryptoPricesReader.Utilities.Helpers;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace CryptoPricesReader.Viewer
 {
     public partial class CPRViewer : Form
     {
+        ApiConnect Api = new ApiConnect();
+
         public CPRViewer ()
         {
             InitializeComponent();
         }
 
-        private async void btnGetPrices_Click (object sender, EventArgs e)
+        private bool CheckApiKey(string apiKey)
         {
             if (txtBoxApiKey.Text == "Your Api Key" || txtBoxApiKey.Text == "")
             {
                 MessageBox.Show("Wrong API KEY!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
             }
             else
             {
-                var rawData = await SendRequest();
-                List<CurrenciesTicker> currenciesTicker = NomicsApiHelpers.ParseJson<List<CurrenciesTicker>>(rawData);
-
-                listBoxCurrencies.DataSource = currenciesTicker;
-                listBoxCurrencies.DisplayMember = "Name";
+                return true;
             }
+        }
 
+        private async void btnGetPrices_Click (object sender, EventArgs e)
+        {
+            var currenciesTicker = await GetCurrenciesTickers(new string[] { "filter=any", "status=active" });
+
+            listBoxCurrencies.Items.Clear();
+            listBoxCurrencies.Items.AddRange(currenciesTicker.ToArray());
+            listBoxCurrencies.DisplayMember = "Name";
+
+            ChangeLabelsVisibility();
+        }
+
+        private async Task<List<CurrenciesTicker>> GetCurrenciesTickers(string[] queryParmas)
+        {
+            if (CheckApiKey(txtBoxApiKey.Text))
+            {
+                var rawData = await Api.SendRequest(QueryType.CurrenciesTicker, queryParmas);
+                return NomicsApiHelpers.ParseJson<List<CurrenciesTicker>>(rawData);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        private void ChangeLabelsVisibility()
+        {
             lblCurrency.Visible = true;
             lblCurrencyTag.Visible = true;
             lblMaxSupply.Visible = true;
@@ -42,47 +66,58 @@ namespace CryptoPricesReader.Viewer
             lblRankTag.Visible = true;
             lblHigh.Visible = true;
             lblHighTag.Visible = true;
-        }
-
-        private async Task<string> SendRequest()
-        {
-            var api = new ApiConnect(txtBoxApiKey.Text);
-
-            string[] queryParmas = new string[2];
-            queryParmas[0] = $"filter=any";
-            queryParmas[1] = "status=active";
-
-            var result = await api.SendRequest(QueryType.CurrenciesTicker, queryParmas);
-
-            return result;
+            lblFullName.Visible = true;
+            lblFullNameTag.Visible = true;
+            groupBoxTickerAttributes.Visible = true;
+            btnRefresh.Visible = true;
         }
 
         private async void listBoxCurrencies_SelectedIndexChanged (object sender, EventArgs e)
         {
             var selectedItem = listBoxCurrencies.SelectedItem as CurrenciesTicker;
+            var currencyTicker = await GetCurrenciesTickers(new string[] { $"ids={selectedItem.Id}", "interval=1h" });
 
             if (selectedItem != null)
             {
-                lblCurrencyTag.Text = selectedItem.Currency;
-                lblPriceTag.Text = selectedItem.Price;
-                lblStatusTag.Text = selectedItem.Status;
-                lblRankTag.Text = selectedItem.Rank;
-                lblHighTag.Text = selectedItem.High;
-                lblPriceDate.Text = selectedItem.PriceDate.ToString();
-                try
-                {
-                    pictureBoxCurrencyPic.Image = await NomicsApiHelpers.GetImageAsync(selectedItem.LogoUrl);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"{ex.Message}", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                SetData(currencyTicker.FirstOrDefault());
+            }
+        }
+
+        private async void SetData(CurrenciesTicker currencyTicker)
+        {
+            lblCurrencyTag.Text = currencyTicker.Currency;
+            lblPriceTag.Text = currencyTicker.Price;
+            lblStatusTag.Text = currencyTicker.Status;
+            lblRankTag.Text = currencyTicker.Rank;
+            lblHighTag.Text = currencyTicker.High;
+            lblPriceDate.Text = currencyTicker.PriceDate.ToString();
+            lblFullNameTag.Text = currencyTicker.Name;
+            lblPriceChangePctTag.Text = currencyTicker.H1.PriceChangePct;
+            lblMarketCapChangePctTag.Text = currencyTicker.H1.MarketCapChangePct;
+
+            try
+            {
+                pictureBoxCurrencyPic.Image = await NomicsApiHelpers.GetImageAsync(currencyTicker.LogoUrl);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void btnExit_Click (object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btnRefresh_Click (object sender, EventArgs e)
+        {
+            listBoxCurrencies_SelectedIndexChanged(sender, e);
+        }
+
+        private void txtBoxApiKey_TextChanged (object sender, EventArgs e)
+        {
+            Api.SetApiKey(txtBoxApiKey.Text);
         }
     }
 }

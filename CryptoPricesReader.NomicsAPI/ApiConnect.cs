@@ -12,7 +12,17 @@ namespace CryptoPricesReader.NomicsAPI
         private const string ApiAddress = "https://api.nomics.com/v1";
         private string ApiKey { get; set; }
 
+        public ApiConnect()
+        {
+
+        }
+
         public ApiConnect (string apiKey)
+        {
+            this.ApiKey = apiKey;
+        }
+
+        public void SetApiKey(string apiKey)
         {
             this.ApiKey = apiKey;
         }
