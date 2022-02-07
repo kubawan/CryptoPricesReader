@@ -8,8 +8,9 @@ namespace CryptoPricesReader.Data.Enums
 {
     public enum Currencies
     {
-        BTC = 0,
-        ETH = 1,
-        ADA = 2,
+        ALL = 0,
+        BTC = 1,
+        ETH = 2,
+        ADA = 3,
     }
 }

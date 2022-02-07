@@ -12,13 +12,6 @@ namespace CryptoPricesReader.Viewer
         public CPRViewer ()
         {
             InitializeComponent();
-
-            StartUp();
-        }
-
-        private void StartUp()
-        {
-            comboBoxCurrencies.DataSource = Enum.GetValues(typeof(Currencies));
         }
 
         private async void btnGetPrices_Click (object sender, EventArgs e)
@@ -32,28 +25,57 @@ namespace CryptoPricesReader.Viewer
                 var rawData = await SendRequest();
                 List<CurrenciesTicker> currenciesTicker = NomicsApiHelpers.ParseJson<List<CurrenciesTicker>>(rawData);
 
-                txtBoxRawData.Text = rawData;
-                lblCurrencyTag.Text = currenciesTicker.FirstOrDefault().Currency;
-                lblPriceTag.Text = currenciesTicker.FirstOrDefault().Price;
-                pictureBoxCurrencyPic.Image = await NomicsApiHelpers.SVGConvertAsync(currenciesTicker.FirstOrDefault().LogoUrl);
+                listBoxCurrencies.DataSource = currenciesTicker;
+                listBoxCurrencies.DisplayMember = "Name";
             }
+
+            lblCurrency.Visible = true;
+            lblCurrencyTag.Visible = true;
+            lblMaxSupply.Visible = true;
+            lblMaxSupplyTag.Visible = true;
+            lblPrice.Visible = true;
+            lblPriceDate.Visible = true;
+            lblPriceTag.Visible = true;
+            lblStatus.Visible = true;
+            lblStatusTag.Visible = true;
         }
 
         private async Task<string> SendRequest()
         {
             var api = new ApiConnect(txtBoxApiKey.Text);
 
-            string[] queryParmas = new string[1];
-            queryParmas[0] = $"ids={comboBoxCurrencies.SelectedItem}";
+            string[] queryParmas = new string[2];
+            queryParmas[0] = $"filter=any";
+            queryParmas[1] = "status=active";
 
             var result = await api.SendRequest(QueryType.CurrenciesTicker, queryParmas);
 
             return result;
         }
 
-        private void CPRViewer_Load (object sender, EventArgs e)
+        private async void listBoxCurrencies_SelectedIndexChanged (object sender, EventArgs e)
         {
+            var selectedItem = listBoxCurrencies.SelectedItem as CurrenciesTicker;
 
+            if (selectedItem != null)
+            {
+                lblCurrencyTag.Text = selectedItem.Currency;
+                lblPriceTag.Text = selectedItem.Price;
+                lblStatusTag.Text = selectedItem.Status;
+                try
+                {
+                    pictureBoxCurrencyPic.Image = await NomicsApiHelpers.GetImageAsync(selectedItem.LogoUrl);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"{ex.Message}", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void btnExit_Click (object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

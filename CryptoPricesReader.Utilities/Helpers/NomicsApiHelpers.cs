@@ -46,14 +46,41 @@ namespace CryptoPricesReader.Utilities.Helpers
             return JsonSerializer.Deserialize<T>(rawData);
         }
 
-        public static async Task<Bitmap> SVGConvertAsync (string svgSource)
+        public static async Task<Bitmap> GetImageAsync(string imageSource)
+        {
+            var fileFormat = imageSource.Substring(imageSource.Length - 3, 3);
+
+            switch (fileFormat)
+            {
+                case "svg":
+                    return await SVGConvertAsync(imageSource);
+                case "jpg":
+                case "png":
+                case "bmp":
+                    return await GetBitmapAsync(imageSource);
+
+                default:
+                    return null;
+            }
+        }
+
+        private static async Task<Bitmap> SVGConvertAsync (string svgSource)
         {
             var client = new HttpClient();
             var httpResponseMessage = await client.GetStringAsync(svgSource);
 
             var svgDoc = Svg.SvgDocument.FromSvg<Svg.SvgDocument>(httpResponseMessage);
 
-            return new Bitmap(svgDoc.Draw(), 16, 16);
+            return new Bitmap(svgDoc.Draw(), 64, 64);
+        }
+
+        private static async Task<Bitmap> GetBitmapAsync(string imageSource)
+        {
+            var client = new HttpClient();
+            var httpResponseMessage = await client.GetStreamAsync(imageSource);
+            var image = new Bitmap(httpResponseMessage);
+            
+            return new Bitmap(image, 64, 64);
         }
     }
 }
