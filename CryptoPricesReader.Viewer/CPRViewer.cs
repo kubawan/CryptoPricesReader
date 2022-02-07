@@ -1,6 +1,9 @@
 using CryptoPricesReader.Data.Enums;
+using CryptoPricesReader.Data.Models.Responses;
 using CryptoPricesReader.NomicsAPI;
 using CryptoPricesReader.Utilities.Helpers;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace CryptoPricesReader.Viewer
 {
@@ -15,11 +18,7 @@ namespace CryptoPricesReader.Viewer
 
         private void StartUp()
         {
-            List<Currencies> list = new List<Currencies>();
-            list.Add(Currencies.BTC);
-            list.Add(Currencies.ETH);
-
-            comboBoxCurrencies.DataSource = list;
+            comboBoxCurrencies.DataSource = Enum.GetValues(typeof(Currencies));
         }
 
         private async void btnGetPrices_Click (object sender, EventArgs e)
@@ -31,8 +30,12 @@ namespace CryptoPricesReader.Viewer
             else
             {
                 var rawData = await SendRequest();
+                List<CurrenciesTicker> currenciesTicker = NomicsApiHelpers.ParseJson<List<CurrenciesTicker>>(rawData);
 
                 txtBoxRawData.Text = rawData;
+                lblCurrencyTag.Text = currenciesTicker.FirstOrDefault().Currency;
+                lblPriceTag.Text = currenciesTicker.FirstOrDefault().Price;
+                pictureBoxCurrencyPic.Image = await NomicsApiHelpers.SVGConvertAsync(currenciesTicker.FirstOrDefault().LogoUrl);
             }
         }
 
@@ -46,6 +49,11 @@ namespace CryptoPricesReader.Viewer
             var result = await api.SendRequest(QueryType.CurrenciesTicker, queryParmas);
 
             return result;
+        }
+
+        private void CPRViewer_Load (object sender, EventArgs e)
+        {
+
         }
     }
 }

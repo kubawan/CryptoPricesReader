@@ -38,6 +38,8 @@
             this.txtBoxApiKey = new System.Windows.Forms.TextBox();
             this.txtBoxRawData = new System.Windows.Forms.TextBox();
             this.lblRawData = new System.Windows.Forms.Label();
+            this.pictureBoxCurrencyPic = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCurrencyPic)).BeginInit();
             this.SuspendLayout();
             // 
             // comboBoxCurrencies
@@ -128,11 +130,20 @@
             this.lblRawData.TabIndex = 9;
             this.lblRawData.Text = "RawData";
             // 
+            // pictureBoxCurrencyPic
+            // 
+            this.pictureBoxCurrencyPic.Location = new System.Drawing.Point(108, 76);
+            this.pictureBoxCurrencyPic.Name = "pictureBoxCurrencyPic";
+            this.pictureBoxCurrencyPic.Size = new System.Drawing.Size(16, 16);
+            this.pictureBoxCurrencyPic.TabIndex = 10;
+            this.pictureBoxCurrencyPic.TabStop = false;
+            // 
             // CPRViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.pictureBoxCurrencyPic);
             this.Controls.Add(this.lblRawData);
             this.Controls.Add(this.txtBoxRawData);
             this.Controls.Add(this.txtBoxApiKey);
@@ -145,6 +156,8 @@
             this.Controls.Add(this.comboBoxCurrencies);
             this.Name = "CPRViewer";
             this.Text = "CPRViewer";
+            this.Load += new System.EventHandler(this.CPRViewer_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCurrencyPic)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -162,5 +175,6 @@
         private TextBox txtBoxApiKey;
         private TextBox txtBoxRawData;
         private Label lblRawData;
+        private PictureBox pictureBoxCurrencyPic;
     }
 }
