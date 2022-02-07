@@ -60,6 +60,8 @@
             this.lblPriceChangePct = new System.Windows.Forms.Label();
             this.btnSaveToFile = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
+            this.comboBoxRefreshInterval = new System.Windows.Forms.ComboBox();
+            this.btnAutoRefresh = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCurrencyPic)).BeginInit();
             this.groupBoxTickerAttributes.SuspendLayout();
             this.SuspendLayout();
@@ -407,12 +409,36 @@
             this.btnRefresh.Text = "Refresh Data";
             this.btnRefresh.UseVisualStyleBackColor = true;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            this.btnRefresh.Visible = false;
+            // 
+            // comboBoxRefreshInterval
+            // 
+            this.comboBoxRefreshInterval.FormattingEnabled = true;
+            this.comboBoxRefreshInterval.Location = new System.Drawing.Point(466, 163);
+            this.comboBoxRefreshInterval.Name = "comboBoxRefreshInterval";
+            this.comboBoxRefreshInterval.Size = new System.Drawing.Size(93, 23);
+            this.comboBoxRefreshInterval.TabIndex = 32;
+            this.comboBoxRefreshInterval.Visible = false;
+            // 
+            // btnAutoRefresh
+            // 
+            this.btnAutoRefresh.Font = new System.Drawing.Font("Segoe UI", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnAutoRefresh.Location = new System.Drawing.Point(466, 192);
+            this.btnAutoRefresh.Name = "btnAutoRefresh";
+            this.btnAutoRefresh.Size = new System.Drawing.Size(93, 33);
+            this.btnAutoRefresh.TabIndex = 33;
+            this.btnAutoRefresh.Text = "Set Autorefresh";
+            this.btnAutoRefresh.UseVisualStyleBackColor = true;
+            this.btnAutoRefresh.Visible = false;
+            this.btnAutoRefresh.Click += new System.EventHandler(this.btnAutoRefresh_Click);
             // 
             // CPRViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(571, 450);
+            this.Controls.Add(this.btnAutoRefresh);
+            this.Controls.Add(this.comboBoxRefreshInterval);
             this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.btnSaveToFile);
             this.Controls.Add(this.groupBoxTickerAttributes);
@@ -482,5 +508,7 @@
         private Label lblTimeIntervalTag;
         private Button btnSaveToFile;
         private Button btnRefresh;
+        private ComboBox comboBoxRefreshInterval;
+        private Button btnAutoRefresh;
     }
 }
