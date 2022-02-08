@@ -62,6 +62,8 @@
             this.btnRefresh = new System.Windows.Forms.Button();
             this.comboBoxRefreshInterval = new System.Windows.Forms.ComboBox();
             this.btnAutoRefresh = new System.Windows.Forms.Button();
+            this.btnPricesToCsv = new System.Windows.Forms.Button();
+            this.checkBoxLogToFile = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCurrencyPic)).BeginInit();
             this.groupBoxTickerAttributes.SuspendLayout();
             this.SuspendLayout();
@@ -393,28 +395,29 @@
             // btnSaveToFile
             // 
             this.btnSaveToFile.Enabled = false;
+            this.btnSaveToFile.Font = new System.Drawing.Font("Segoe UI", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnSaveToFile.Location = new System.Drawing.Point(466, 366);
             this.btnSaveToFile.Name = "btnSaveToFile";
             this.btnSaveToFile.Size = new System.Drawing.Size(93, 33);
             this.btnSaveToFile.TabIndex = 30;
-            this.btnSaveToFile.Text = "Save To File";
+            this.btnSaveToFile.Text = "Save data to file";
             this.btnSaveToFile.UseVisualStyleBackColor = true;
             // 
             // btnRefresh
             // 
-            this.btnRefresh.Location = new System.Drawing.Point(466, 231);
+            this.btnRefresh.Location = new System.Drawing.Point(466, 288);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(93, 33);
             this.btnRefresh.TabIndex = 31;
             this.btnRefresh.Text = "Refresh Data";
             this.btnRefresh.UseVisualStyleBackColor = true;
-            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             this.btnRefresh.Visible = false;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // comboBoxRefreshInterval
             // 
             this.comboBoxRefreshInterval.FormattingEnabled = true;
-            this.comboBoxRefreshInterval.Location = new System.Drawing.Point(466, 163);
+            this.comboBoxRefreshInterval.Location = new System.Drawing.Point(466, 220);
             this.comboBoxRefreshInterval.Name = "comboBoxRefreshInterval";
             this.comboBoxRefreshInterval.Size = new System.Drawing.Size(93, 23);
             this.comboBoxRefreshInterval.TabIndex = 32;
@@ -423,7 +426,7 @@
             // btnAutoRefresh
             // 
             this.btnAutoRefresh.Font = new System.Drawing.Font("Segoe UI", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnAutoRefresh.Location = new System.Drawing.Point(466, 192);
+            this.btnAutoRefresh.Location = new System.Drawing.Point(466, 249);
             this.btnAutoRefresh.Name = "btnAutoRefresh";
             this.btnAutoRefresh.Size = new System.Drawing.Size(93, 33);
             this.btnAutoRefresh.TabIndex = 33;
@@ -432,11 +435,35 @@
             this.btnAutoRefresh.Visible = false;
             this.btnAutoRefresh.Click += new System.EventHandler(this.btnAutoRefresh_Click);
             // 
+            // btnPricesToCsv
+            // 
+            this.btnPricesToCsv.Font = new System.Drawing.Font("Segoe UI", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnPricesToCsv.Location = new System.Drawing.Point(466, 327);
+            this.btnPricesToCsv.Name = "btnPricesToCsv";
+            this.btnPricesToCsv.Size = new System.Drawing.Size(93, 33);
+            this.btnPricesToCsv.TabIndex = 34;
+            this.btnPricesToCsv.Text = "Save prices to .csv file";
+            this.btnPricesToCsv.UseVisualStyleBackColor = true;
+            this.btnPricesToCsv.Enabled = false;
+            // 
+            // checkBoxLogToFile
+            // 
+            this.checkBoxLogToFile.AutoSize = true;
+            this.checkBoxLogToFile.Location = new System.Drawing.Point(476, 35);
+            this.checkBoxLogToFile.Name = "checkBoxLogToFile";
+            this.checkBoxLogToFile.Size = new System.Drawing.Size(84, 19);
+            this.checkBoxLogToFile.TabIndex = 35;
+            this.checkBoxLogToFile.Text = "Log to file?";
+            this.checkBoxLogToFile.UseVisualStyleBackColor = true;
+            this.checkBoxLogToFile.Enabled = false;
+            // 
             // CPRViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(571, 450);
+            this.Controls.Add(this.checkBoxLogToFile);
+            this.Controls.Add(this.btnPricesToCsv);
             this.Controls.Add(this.btnAutoRefresh);
             this.Controls.Add(this.comboBoxRefreshInterval);
             this.Controls.Add(this.btnRefresh);
@@ -510,5 +537,7 @@
         private Button btnRefresh;
         private ComboBox comboBoxRefreshInterval;
         private Button btnAutoRefresh;
+        private Button btnPricesToCsv;
+        private CheckBox checkBoxLogToFile;
     }
 }

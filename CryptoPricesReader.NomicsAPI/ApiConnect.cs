@@ -1,4 +1,5 @@
 ﻿using CryptoPricesReader.Data.Enums;
+using CryptoPricesReader.Utilities;
 using CryptoPricesReader.Utilities.Helpers;
 using System.Net.Http.Headers;
 using System.Text;
@@ -33,9 +34,11 @@ namespace CryptoPricesReader.NomicsAPI
             _httpClient.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
 
-            var getTask = await _httpClient.GetStringAsync(QueryBuilder(queryType, queryParams));
-
-            return getTask;
+            Logger.LogInfoToFile($"ApiCalls", $"GET Request: {QueryBuilder(queryType, queryParams)}");
+            var response = await _httpClient.GetStringAsync(QueryBuilder(queryType, queryParams));
+            
+            Logger.LogInfoToFile($"ApiCalls", $"GET Response received!");
+            return response;
         }
 
         private string QueryBuilder(QueryType queryType, string[] queryParams)
