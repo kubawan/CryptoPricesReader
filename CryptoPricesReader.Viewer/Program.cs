@@ -1,4 +1,4 @@
-namespace CryptoPricesReader.Viewer
+namespace CryptoPricesReader.Viewer.WinFroms
 {
     internal static class Program
     {

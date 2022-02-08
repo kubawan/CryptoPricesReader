@@ -3,7 +3,7 @@ using CryptoPricesReader.Data.Models.Responses;
 using CryptoPricesReader.NomicsAPI;
 using CryptoPricesReader.Utilities.Helpers;
 
-namespace CryptoPricesReader.Viewer
+namespace CryptoPricesReader.Viewer.WinFroms
 {
     public partial class CPRViewer : Form
     {
