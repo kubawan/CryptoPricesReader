@@ -5,13 +5,15 @@ VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CryptoPricesReader.Test", "CryptoPricesReader.Test\CryptoPricesReader.Test.csproj", "{4DC886BA-1660-4489-AF42-B7965629CDC0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CryptoPricesReader.NomicsAPI", "CryptoPricesReader.NomicsAPI\CryptoPricesReader.NomicsAPI.csproj", "{5BE2AA29-C0BF-4651-AE01-62C5613806F1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CryptoPricesReader.NomicsAPI", "CryptoPricesReader.NomicsAPI\CryptoPricesReader.NomicsAPI.csproj", "{5BE2AA29-C0BF-4651-AE01-62C5613806F1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CryptoPricesReader.Viewer", "CryptoPricesReader.Viewer\CryptoPricesReader.Viewer.csproj", "{12D33741-807D-429B-B8FD-B4F635076CC5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CryptoPricesReader.Viewer.WinForms", "CryptoPricesReader.Viewer\CryptoPricesReader.Viewer.WinForms.csproj", "{12D33741-807D-429B-B8FD-B4F635076CC5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CryptoPricesReader.Data", "CryptoPricesReader.Data\CryptoPricesReader.Data.csproj", "{2D9663BE-E9D6-4314-9E9E-D43D5DA31A99}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CryptoPricesReader.Data", "CryptoPricesReader.Data\CryptoPricesReader.Data.csproj", "{2D9663BE-E9D6-4314-9E9E-D43D5DA31A99}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CryptoPricesReader.Utilities", "CryptoPricesReader.Utilities\CryptoPricesReader.Utilities.csproj", "{57EC2F0A-E357-42F9-8507-0DB69D2D4021}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CryptoPricesReader.Utilities", "CryptoPricesReader.Utilities\CryptoPricesReader.Utilities.csproj", "{57EC2F0A-E357-42F9-8507-0DB69D2D4021}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CryptoPricesReader.Viewer.WPF", "CryptoPricesReader.Viewer.WPF\CryptoPricesReader.Viewer.WPF.csproj", "{8E20038A-1D8D-4CBF-8FED-12AF6E53F380}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{57EC2F0A-E357-42F9-8507-0DB69D2D4021}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57EC2F0A-E357-42F9-8507-0DB69D2D4021}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57EC2F0A-E357-42F9-8507-0DB69D2D4021}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E20038A-1D8D-4CBF-8FED-12AF6E53F380}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E20038A-1D8D-4CBF-8FED-12AF6E53F380}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E20038A-1D8D-4CBF-8FED-12AF6E53F380}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E20038A-1D8D-4CBF-8FED-12AF6E53F380}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
