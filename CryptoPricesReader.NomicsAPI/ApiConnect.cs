@@ -18,11 +18,6 @@ namespace CryptoPricesReader.NomicsAPI
 
         }
 
-        public ApiConnect (string apiKey)
-        {
-            this.ApiKey = apiKey;
-        }
-
         public void SetApiKey(string apiKey)
         {
             this.ApiKey = apiKey;

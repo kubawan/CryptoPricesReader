@@ -14,7 +14,11 @@ namespace CryptoPricesReader.Test
 
         public static async Task Run()
         {
-            var api = new ApiConnect(Console.ReadLine());
+            Console.Write("Enter api key: ");
+            string apiKey = Console.ReadLine();
+
+            ApiConnect api = new ApiConnect();
+            api.SetApiKey(apiKey);
 
             string[] queryParams = new string[2];
             queryParams[0] = "ids=BTC";
